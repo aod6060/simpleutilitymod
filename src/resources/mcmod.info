@@ -1,0 +1,16 @@
+[
+{
+  "modid": "sum",
+  "name": "Simple Utility Mod",
+  "description": "A simple mod that add random thing that I want to play with in minecraft.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["derf6060"],
+  "credits": "derf6060 author",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
