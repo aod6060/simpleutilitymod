@@ -1,0 +1,13 @@
+# Item Groups
+itemGroup.tabSUM=Simple Utility Mod
+# Items
+# Blocks
+tile.minner.name=Auto Minner
+tile.spawner.name=Spawn Cage
+tile.spawner_pig.name=Pig Spawner
+tile.spawner_cow.name=Cow Spawner
+tile.spawner_chicken.name=Chicken Spawner
+tile.spawner_sheep.name=Sheep Spawner
+tile.spawner_bat.name=Bat Spawner
+tile.spawner_mooshroom.name=Mooshroom Spawner
+tile.death.name=Death!!!

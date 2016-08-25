@@ -1,5 +1,7 @@
 package com.derf.sum.creativetabs;
 
+import com.derf.sum.block.BlockManager;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -13,7 +15,7 @@ public final class CreativeTabsManager {
 			@Override
 			public Item getTabIconItem() {
 				// TODO Auto-generated method stub
-				return Items.BEETROOT;
+				return Item.getItemFromBlock(BlockManager.minner);
 			}
 			
 		};

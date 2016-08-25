@@ -1,0 +1,6 @@
+{
+  "parent": "sum:item/item_block",
+  "textures": {
+    "all": "sum:blocks/spawner_chicken"
+  }
+}
