@@ -2,6 +2,8 @@ package com.derf.sum.block.tileentity;
 
 import java.util.List;
 
+import com.derf.sum.util.SimpleTimer;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,8 +22,7 @@ public class TileEntityDeath extends TileEntity implements ITickable {
 	protected int halfHeight = height / 2;
 	protected int depth = 7;
 	protected int halfDepth = depth / 2;
-	protected int maxTime = 20;
-	protected int time = maxTime;
+	protected SimpleTimer timer = new SimpleTimer(SimpleTimer.toSeconds(1));
 	
 	@Override
 	public void update() {
@@ -29,7 +30,7 @@ public class TileEntityDeath extends TileEntity implements ITickable {
 		
 		
 		if(!worldObj.isRemote) {
-			if(time <= 0) {
+			if(timer.isTimer()) {
 				AxisAlignedBB box = createAABB(this.pos);
 				List<Entity> creatures = this.getEntitiesWithAABB(worldObj, EntityCreature.class, box);
 				
@@ -38,9 +39,9 @@ public class TileEntityDeath extends TileEntity implements ITickable {
 					entity.attackEntityFrom(DamageSource.generic, 2000.0f);
 				}
 				
-				time = maxTime;
+				timer.reset();
 			} else {
-				--time;
+				timer.update();
 			}
 		}
 	}
@@ -49,13 +50,13 @@ public class TileEntityDeath extends TileEntity implements ITickable {
 	public void readFromNBT(NBTTagCompound compound) {
 		// TODO Auto-generated method stub
 		super.readFromNBT(compound);
-		this.time = compound.getInteger("time");
+		timer.readFromNBT(compound);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		// TODO Auto-generated method stub
-		compound.setInteger("time", this.time);
+		timer.writeToNBT(compound);
 		return super.writeToNBT(compound);
 	}
 	

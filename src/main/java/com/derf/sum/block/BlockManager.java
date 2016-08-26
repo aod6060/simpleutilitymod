@@ -2,7 +2,12 @@ package com.derf.sum.block;
 
 import com.derf.sum.SumRegistry;
 import com.derf.sum.block.tileentity.TileEntityDeath;
+import com.derf.sum.block.tileentity.TileEntityHealer;
+import com.derf.sum.block.tileentity.TileEntityHunger;
+import com.derf.sum.block.tileentity.TileEntityMagnetCreatures;
+import com.derf.sum.block.tileentity.TileEntityMagnetItems;
 import com.derf.sum.block.tileentity.TileEntityMinner;
+import com.derf.sum.block.tileentity.TileEntityServoItems;
 import com.derf.sum.block.tileentity.TileEntitySpawner;
 import com.derf.sum.creativetabs.CreativeTabsManager;
 import com.derf.sum.util.SpawnerType;
@@ -25,10 +30,18 @@ public final class BlockManager {
 	public static Block spawnCageBat;
 	public static Block spawnCageMooshroom;
 	// Death (This kills any entity within a 5x5x5 cube).
-	public static Block death;
+	public static Block death; // This kills any creature 
 	// Magnets Block
+	public static Block magnetItems; // This will draw an item in 
+	public static Block magnetCreatures; // This will draw in an creature entity to it
+	// Servo
+	public static Block servoItems; // This will place items an adjacent inventory
 	// Healer
+	public static Block healer; // Heals the players health
 	// Hunger
+	public static Block hunger; // Heals the players hungar + saturation
+	// Ore Spawner
+	public static Block oreSpawner; // This will periodically spawn ore for you
 	// ChunkLoader
 	public static void create() {
 		// Minner
@@ -43,6 +56,15 @@ public final class BlockManager {
 		spawnCageMooshroom = new BlockSpawner("spawner_mooshroom", SpawnerType.MOOSHROOM);
 		// Death
 		death = new BlockDeath();
+		// Magnets
+		magnetItems = new BlockMagnetItems();
+		magnetCreatures = new BlockMagnetCreatures();
+		// Servo
+		servoItems = new BlockServoItems();
+		// Health
+		healer = new BlockHealer();
+		// Hungar
+		hunger = new BlockHunger();
 	}
 	
 	public static void register() {
@@ -58,12 +80,33 @@ public final class BlockManager {
 		SumRegistry.registerBlock(spawnCageMooshroom, "spawner_mooshroom");
 		// Death
 		SumRegistry.registerBlock(death, "death");
+		// Magnets
+		SumRegistry.registerBlock(magnetItems, "magnet_items");
+		SumRegistry.registerBlock(magnetCreatures, "magnet_creatures");
+		// Servo
+		SumRegistry.registerBlock(servoItems, "servo_items");
+		// Healer
+		SumRegistry.registerBlock(healer, "healer");
+		// Hunger
+		SumRegistry.registerBlock(hunger, "hunger");
 	}
 	
 	public static void registerTileEntities() {
+		// Minner
 		SumRegistry.registerTileEntity(TileEntityMinner.class, "minner");
+		// Spawner
 		SumRegistry.registerTileEntity(TileEntitySpawner.class, "spawner");
+		// Death
 		SumRegistry.registerTileEntity(TileEntityDeath.class, "death");
+		// Magnets
+		SumRegistry.registerTileEntity(TileEntityMagnetItems.class, "magnet_items");
+		SumRegistry.registerTileEntity(TileEntityMagnetCreatures.class, "magnet_creatures");
+		// Servo
+		SumRegistry.registerTileEntity(TileEntityServoItems.class, "servo_items");
+		// Healer
+		SumRegistry.registerTileEntity(TileEntityHealer.class, "healer");
+		// Hunger
+		SumRegistry.registerTileEntity(TileEntityHunger.class, "hunger");
 	}
 	
 	public static void creativeTabs() {
@@ -79,6 +122,15 @@ public final class BlockManager {
 		spawnCageMooshroom.setCreativeTab(CreativeTabsManager.tabsSUM);
 		// Death
 		death.setCreativeTab(CreativeTabsManager.tabsSUM);
+		// Magnets
+		magnetItems.setCreativeTab(CreativeTabsManager.tabsSUM);
+		magnetCreatures.setCreativeTab(CreativeTabsManager.tabsSUM);
+		// Servo
+		servoItems.setCreativeTab(CreativeTabsManager.tabsSUM);
+		// Healer
+		healer.setCreativeTab(CreativeTabsManager.tabsSUM);
+		// Hunger
+		hunger.setCreativeTab(CreativeTabsManager.tabsSUM);
 	}
 	
 	public static void crafting() {
@@ -104,5 +156,14 @@ public final class BlockManager {
 		SumRegistry.registerRender(spawnCageMooshroom, "spawner_mooshroom");
 		// Death
 		SumRegistry.registerRender(death, "death");
+		// Magnets
+		SumRegistry.registerRender(magnetItems, "magnet_items");
+		SumRegistry.registerRender(magnetCreatures, "magnet_creatures");
+		// Servo
+		SumRegistry.registerRender(servoItems, "servo_items");
+		// Healer
+		SumRegistry.registerRender(healer, "healer");
+		// Hunger
+		SumRegistry.registerRender(hunger, "hunger");
 	}
 }

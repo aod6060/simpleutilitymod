@@ -3,12 +3,12 @@ package com.derf.sum.block.tileentity;
 import java.util.Random;
 
 import com.derf.sum.entity.EntitySpawnerFactory;
+import com.derf.sum.util.SimpleTimer;
 import com.derf.sum.util.SpawnerType;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 
 public class TileEntitySpawner extends TileEntity implements ITickable {
@@ -19,15 +19,18 @@ public class TileEntitySpawner extends TileEntity implements ITickable {
 	protected int halfHeight = height / 2;
 	protected Random rand = new Random();
 	protected SpawnerType spawnerType;
+	/*
 	protected int maxTime = 20;
 	protected int time = maxTime;
-	
+	*/
+	protected SimpleTimer timer = new SimpleTimer(SimpleTimer.toSeconds(1));
+			
 	@Override
 	public void update() {
 		
 		if(!worldObj.isRemote) {
 			if(spawnerType != SpawnerType.SPAWNCAGE && spawnerType != null) {
-				if(time == 0) {
+				if(timer.isTimer()) {
 					// Time to spawn the entity in a 
 					int tx = rand.nextInt(width);
 					int tz = rand.nextInt(height);
@@ -45,9 +48,9 @@ public class TileEntitySpawner extends TileEntity implements ITickable {
 						worldObj.spawnEntityInWorld(entity);
 					}
 					
-					time = maxTime;
+					timer.reset();
 				} else {
-					--time;
+					timer.update();
 				}
 			}
 		}
@@ -66,14 +69,14 @@ public class TileEntitySpawner extends TileEntity implements ITickable {
 		// TODO Auto-generated method stub
 		super.readFromNBT(compound);
 		this.spawnerType = SpawnerType.values()[compound.getInteger("spawner_type")];
-		this.time = compound.getInteger("time");
+		this.timer.readFromNBT(compound);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		// TODO Auto-generated method stub
 		compound.setInteger("spawner_type", spawnerType.ordinal());
-		compound.setInteger("time", this.time);
+		this.timer.writeToNBT(compound);
 		return super.writeToNBT(compound);
 	}
 	
